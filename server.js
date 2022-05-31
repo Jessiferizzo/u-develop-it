@@ -1,5 +1,6 @@
 //import express
 const express = require('express');
+const mysql = require('mysql2');
 
 //add port designation and app expression
 const PORT = process.env.PORT || 3001;
@@ -10,16 +11,23 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 
+// Connect to mysql database
+const db = mysql.createConnection(
+    {
+      host: 'localhost',
+      // Your MySQL username,
+      user: 'root',
+      // Your MySQL password
+      password: '',
+      database: 'election'
+    },
+    console.log('Connected to the election database.')
+  );
 
 
 
 
-//get test route
-app.get('/', (req, res) => {
-    res.json({
-      message: 'Hello World'
-    });
-  });
+
 
 // Default response for any other request (Not Found)
 app.use((req, res) => {
